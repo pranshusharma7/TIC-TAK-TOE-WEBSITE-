@@ -393,5 +393,36 @@ body {
     background: linear-gradient(90deg, #ff4d6d, #00f0ff);
     box-shadow: 0 8px 32px #ff4d6d, 0 4px 16px #00f0ff;
     transform: scale(1.06);
-}
+} 
+
+.text-3d {
+    font-size: 3rem;
+    color: #00fff0; /* Neon cyan */
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow:
+      0 2px 0 #232946,
+      0 4px 0 #ffb800,
+      0 8px 6px #00092b,
+      0 0 12px #00fff0,
+      0 0 24px #ffb800,
+      0 0 48px #00fff0;
+    transform: perspective(400px) rotateX(10deg);
+    transition: transform 0.3s, text-shadow 0.3s;
+  }
+
+  .text-3d:hover {
+    transform: perspective(400px) rotateX(0deg) scale(1.05);
+    text-shadow:
+      0 4px 0 #232946,
+      0 8px 0 #ffb800,
+      0 12px 8px #00092b,
+      0 0 24px #00fff0,
+      0 0 48px #ffb800,
+      0 0 96px #00fff0;
+  }  
+
+
+
+
 
