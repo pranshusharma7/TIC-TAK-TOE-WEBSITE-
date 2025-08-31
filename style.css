@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+}
+nav {
+    background-color: black;
+    color: white;
+    height: 75px;
+    font-size: 27px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+     font-family: "Roboto Mono", monospace;
+}
+nav ul {
+    list-style-type: none;
+
+} 
+.gameContainer{ 
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.container{
+    display: grid;
+    grid-template-rows: repeat(3, 10vw);
+    grid-template-columns: repeat(3, 10vw);
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+.box{
+    border: 2px solid black;
+    font-size: 8vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box:hover{
+    background-color: rgb(242, 234, 250);
+}
+
+.info {
+    font-size: 22px;
+}
+
+.gameInfo{
+    padding: 0 34px;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root{
+  --bg1: #181c2b;
+  --bg2: #232946;
+  --accent1: #ffb800;
+  --accent2: #00fff0;
+  --box-bg: #232946;
+  --box-border: #00fff0;
+  --box-hover: #282f44;
+  --x-color: #ffb800;
+  --o-color: #00fff0;
+  --info-bg: #232946;
+  --info-color: #fff;
+}
+
+/* 3D Animated Background */
+body {
+  background: linear-gradient(160deg, var(--bg1), var(--bg2));
+  overflow: hidden;
+  perspective: 1000px;
+  min-height: 100vh;
+  position: relative;
+  color: var(--info-color);
+}
+
+/* Game container with neon glow */
+.gamecontainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    box-shadow: 0 0 40px 0 var(--accent2), 0 1.5px 8px rgba(0,0,0,0.2);
+    border-radius: 24px;
+    background: rgba(35,41,70,0.85);
+    backdrop-filter: blur(6px);
+    transform: rotateY(8deg) rotateX(4deg);
+    transition: transform 0.4s cubic-bezier(.25,.8,.25,1);
+    z-index: 2;
+    position: relative;
+}
+
+/* Board grid */
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, 10vw);
+    grid-template-columns: repeat(3, 10vw);
+    font-family: "Roboto Mono", monospace;
+    position: relative;
+    background: var(--box-bg);
+    border-radius: 16px;
+    box-shadow: 0 0 24px 0 var(--accent1);
+}
+
+/* Game boxes */
+.box {
+    border: 2.5px solid var(--box-border);
+    font-size: 8vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--box-bg);
+    color: var(--x-color);
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+    box-shadow: 0 0 12px 0 var(--accent2);
+    border-radius: 10px;
+} 
+
+.box:hover {
+    background-color: var(--box-hover);
+    box-shadow: 0 0 24px 4px var(--accent1), 0 0 8px 2px var(--accent2);
+    color: var(--o-color);
+    font-family: "Nunito", sans-serif;
+}
+
+/* X and O colors */
+.boxtext {
+    color: inherit;
+}
+.boxtext:empty {
+    color: transparent;
+}
+
+/* Info panel */
+.info, .btn {
+    background: var(--info-bg);
+    color: var(--info-color);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    margin: 8px 0;
+    border: none;
+    box-shadow: 0 0 8px 0 var(--accent2);
+}
+
+.btn {
+    cursor: pointer;
+    background: var(--accent1);
+    color: #232946;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+.btn:hover {
+    background: var(--accent2);
+    color: #181c2b;
+}
+
+/* Win image */
+.imgbox img {
+    display: block;
+    margin: 0 auto;
+    width: 0px;
+    transition: width 0.5s;
+}
+
+/* Borders for board */
+.br-0 { border-right: 0; } 
+.bl-0 { border-left: 0; }
+.bt-0 { border-top: 0; }
+.bb-0 { border-bottom: 0; }
+
+/* 3D Animated Background (keep your previous orb and grid styles) */
+.orb {
+  position: fixed;
+  width: 70vmax; height: 70vmax;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 30% 30%, var(--accent1), transparent 60%),
+              radial-gradient(circle at 70% 70%, var(--accent2), transparent 50%);
+  filter: blur(60px) saturate(140%);
+  opacity: .9;
+  animation: rotate 25s linear infinite;
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg);}
+  to   { transform: translate(-50%, -50%) rotate(360deg);}
+}
+.grid {
+  position: fixed;
+  width: 200vmax; height: 200vmax;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) rotateX(75deg) translateZ(-300px);
+  background-image: repeating-linear-gradient(0deg,rgba(255,255,255,0.08) 0 1px,transparent 1px 60px),
+                    repeating-linear-gradient(90deg,rgba(255,255,255,0.08) 0 1px,transparent 1px 60px);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+/* 3D Heading Styles */
+.heading-3d {
+    font-family: 'Dosis', 'Nunito', sans-serif;
+    font-size: 2.7rem;
+    color: #00fff0; /* Neon cyan for best effect */
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-shadow:
+        0 2px 0 #232946,
+        0 4px 0 #ffb800,
+        0 8px 12px #00092b,
+        0 0 24px #00fff0,
+        0 0 48px #ffb800;
+    transform: perspective(300px) rotateX(8deg) scale(1.08);
+    margin-bottom: 38px;
+    margin-top: 18px;
+    transition: text-shadow 0.3s, transform 0.3s;
+}
+.heading-3d:hover {
+    transform: perspective(300px) rotateX(0deg) scale(1.12);
+    text-shadow:
+        0 4px 0 #232946,
+        0 8px 0 #ffb800,
+        0 12px 24px #00092b,
+        0 0 32px #00fff0,
+        0 0 64px #ffb800;
+}
+
+.info-3d {
+    background: linear-gradient(90deg, #00fff0 30%, #ffb800 100%);
+    color: #181c2b;
+    font-family: 'Dosis', 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 10px 28px;
+    border-radius: 12px;
+    margin: 12px 0;
+    box-shadow:
+        0 2px 0 #232946,
+        0 4px 0 #ffb800,
+        0 8px 12px #00092b,
+        0 0 24px #00fff0;
+    text-shadow:
+        0 2px 0 #232946,
+        0 4px 0 #ffb800,
+        0 0 12px #00fff0;
+    letter-spacing: 1.5px;
+    border: none;
+    display: inline-block;
+    transition: box-shadow 0.3s, text-shadow 0.3s, transform 0.2s;
+}
+.info-3d:hover {
+    box-shadow:
+        0 4px 0 #232946,
+        0 8px 0 #ffb800,
+        0 12px 24px #00092b,
+        0 0 32px #00fff0;
+    text-shadow:
+        0 4px 0 #232946,
+        0 8px 0 #ffb800,
+        0 0 24px #00fff0;
+    transform: scale(1.05);
+}
+
+.btn-3d {
+    background: linear-gradient(90deg, #ffb800 30%, #00fff0 100%);
+    color: #181c2b;
+    font-family: 'Dosis', 'Nunito', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    padding: 10px 32px;
+    border-radius: 12px;
+    margin: 12px 0;
+    border: none;
+    box-shadow:
+        0 2px 0 #232946,
+        0 4px 0 #00fff0,
+        0 8px 12px #00092b,
+        0 0 24px #ffb800;
+    text-shadow:
+        0 2px 0 #232946,
+        0 4px 0 #00fff0,
+        0 0 12px #ffb800;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: box-shadow 0.3s, text-shadow 0.3s, transform 0.2s, background 0.2s;
+    display: inline-block;
+}
+.btn-3d:hover {
+    background: linear-gradient(90deg, #00fff0 30%, #ffb800 100%);
+    box-shadow:
+        0 4px 0 #232946,
+        0 8px 0 #00fff0,
+        0 12px 24px #00092b,
+        0 0 32px #ffb800;
+    text-shadow:
+        0 4px 0 #232946,
+        0 8px 0 #00fff0,
+        0 0 24px #ffb800;
+    transform: scale(1.08);
+}
+
+.info-3d-awesome {
+    background: linear-gradient(90deg, #ff4d6d 0%, #00f0ff 100%);
+    color: #fff;
+    font-family: 'Dosis', 'Nunito', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    padding: 12px 32px;
+    border-radius: 16px;
+    margin: 16px 0;
+    box-shadow:
+        0 2px 8px #ff4d6d,
+        0 4px 24px #00f0ff,
+        0 0 32px #fff2;
+    text-shadow:
+        0 2px 8px #ff4d6d,
+        0 4px 24px #00f0ff;
+    letter-spacing: 2px;
+    border: none;
+    display: inline-block;
+    transition: box-shadow 0.3s, text-shadow 0.3s, transform 0.2s, background 0.2s;
+}
+.info-3d-awesome:hover {
+    background: linear-gradient(90deg, #00f0ff 0%, #ff4d6d 100%);
+    box-shadow:
+        0 4px 16px #00f0ff,
+        0 8px 32px #ff4d6d,
+        0 0 48px #fff4;
+    text-shadow:
+        0 4px 16px #00f0ff,
+        0 8px 32px #ff4d6d;
+    transform: scale(1.06);
+}
+
+.btn-3d-awesome {
+    background: linear-gradient(90deg, #00f0ff 0%, #ff4d6d 100%);
+    color: #181c2b;
+    font-family: 'Dosis', 'Nunito', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    padding: 12px 36px;
+    border-radius: 16px;
+    margin: 16px 0;
+    border: none;
+    box-shadow:
+        0 2px 8px #00f0ff,
+        0 4px 24px #ff4d6d,
+        0 0 32px #fff2;
+    text-shadow:
+        0 2px 8px #00f0ff,
+        0 4px 24px #ff4d6d;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: box-shadow 0.3s, text-shadow 0.3s, transform 0.2s, background 0.2s;
+    display: inline-block;
+}
+.btn-3d-awesome:hover {
+    background: linear-gradient(90deg, #ff4d6d 0%, #00f0ff 100%);
+    box-shadow:
+        0 4px 16px #ff4d6d,
+        0 8px 32px #00f0ff,
+        0 0 48px #fff4;
+    text-shadow:
+        0 4px 16px #ff4d6d,
+        0 8px 32px #00f0ff;
+    transform: scale(1.08);
+}
+
+.neon-gradient {
+    background: linear-gradient(90deg, #00f0ff, #ff4d6d);
+    box-shadow: 0 4px 16px #00f0ff, 0 8px 32px #ff4d6d;
+    color: #fff;
+    font-family: 'Dosis', 'Nunito', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    padding: 12px 36px;
+    border-radius: 16px;
+    margin: 16px 0;
+    border: none;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: box-shadow 0.3s, background 0.2s, transform 0.2s;
+    display: inline-block;
+    text-shadow: 0 2px 8px #00f0ff, 0 4px 24px #ff4d6d;
+}
+.neon-gradient:hover {
+    background: linear-gradient(90deg, #ff4d6d, #00f0ff);
+    box-shadow: 0 8px 32px #ff4d6d, 0 4px 16px #00f0ff;
+    transform: scale(1.06);
+}
+
